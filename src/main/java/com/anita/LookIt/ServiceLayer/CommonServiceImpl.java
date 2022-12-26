@@ -37,7 +37,7 @@ public class CommonServiceImpl implements CommonService{
 												if(register.getProfile()!=null && !register.getProfile().isEmpty()) {
 												
 													 UserDetails detaills =dao.getByEmailId(register.getEmail());
-													   if(detaills.getEmail().equals(register.getEmail())) {
+													   if(detaills!=null) {
 														   return "Email is alraedy registered you can login directly";
 													   }else {
                                 
@@ -52,6 +52,7 @@ public class CommonServiceImpl implements CommonService{
 												       details.setState(register.getState());
 												       details.setCountry(register.getCountry());
 												       details.setPincode(register.getPincode());
+												       details.setProfile(register.getProfile());
 													   dao.save(details);
 														
 										               return "data saved";

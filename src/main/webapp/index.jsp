@@ -317,9 +317,9 @@
      <td>
        <select name="profile">
        <option value="select" >select</option>
-       <option value="customer">Customer</option>
-       <option value="admin">Admin</option>
-       <option value="worker">Worker</option>
+       <option>Customer</option>
+       <option>Admin</option>
+       <option>Worker</option>
      </select>
      
      </td>
