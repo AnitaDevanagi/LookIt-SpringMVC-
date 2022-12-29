@@ -12,9 +12,12 @@
    padding:10px;
 }
 </style>
+
+
+
 </head>
-<body>
+<body >
  <h2 id="header">LookIt</h2>
- <h4>WelCome${responsemsg}</h4>
+
 </body>
 </html>

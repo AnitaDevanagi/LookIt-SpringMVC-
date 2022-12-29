@@ -1,15 +1,18 @@
 package com.anita.LookIt.ServiceLayer;
 
 
-import java.util.Random;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.anita.LookIt.DateAndTime.DateAndTimeapi;
+import com.anita.LookIt.Entity.CustomerDetails;
 import com.anita.LookIt.Entity.UserDetails;
 import com.anita.LookIt.Util.LookItUtil;
+
 import com.anita.LookIt.dao.DataAccessDAO;
+import com.anita.LookIt.dto.Customerdetails;
 import com.anita.LookIt.dto.ForgetPasswordDTO;
 import com.anita.LookIt.dto.LogInDTO;
 import com.anita.LookIt.dto.Register;
@@ -20,6 +23,9 @@ public class CommonServiceImpl implements CommonService{
 	private  DataAccessDAO dao;
     @Autowired
     private LookItUtil util;
+    
+    @Autowired
+    private DateAndTimeapi datetime;
     
 	public String validateandSave(Register register) {
 
@@ -107,7 +113,7 @@ public class CommonServiceImpl implements CommonService{
 			if(login.getPassword()!=null && !login.getPassword().isEmpty()) {
 				UserDetails details=  dao.getByEmailId(login.getEmail());
 				if(login.getEmail().equals(details.getEmail())&& login.getPassword().equals(details.getPassword())) {
-					    return "Login Successfully"; 
+					    return login.getEmail(); 
 				}else {
 					return "Invalid Email and password";
 				}
@@ -168,9 +174,44 @@ public class CommonServiceImpl implements CommonService{
 		return "password Updated";
 	    
 	    			
-	}		
+	}
+
+	@Override
+	public String validateandsavecustomerdetails(Customerdetails customer) {
+		if(customer.getEmail()!=null && !customer.getEmail().isEmpty()) {
+			if(customer.getModel()!=null && !customer.getModel().isEmpty()) {
+				if(customer.getIssue()!=null && !customer.getIssue().isEmpty()) {
+					String datetime1= datetime.calldate(); 
+					CustomerDetails details= new CustomerDetails();
+					details.setEmail(customer.getEmail());
+					details.setModel(customer.getModel());
+					details.setIssue(customer.getIssue());
+					details.setCreatedate(datetime1);
+					details.setStatus("open");
+					dao.savedetails(details);
+				}else {
+					return "please Enter your issue";
+				}
+					
+			}else {
+				return "Enter model";
+			}
+	}else {
+		return "Invalid Email";
+	}
+		return "data saved";		
 	
-}
+	}
+
+	@Override
+	public CustomerDetails getmyprofile(String email) {
+		CustomerDetails result=null;
+		if(email!=null && !email.isEmpty()) {
+	    result = dao.getByEmail(email);
+	    }
+		return result;
+	}
+	}
 	
 		
 	

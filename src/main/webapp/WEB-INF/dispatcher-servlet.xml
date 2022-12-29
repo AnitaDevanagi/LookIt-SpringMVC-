@@ -27,6 +27,7 @@
              <property name="annotatedClasses">
                   <list>
                      <value>com.anita.LookIt.Entity.UserDetails</value>
+                     <value>com.anita.LookIt.Entity.CustomerDetails</value>
                   </list>
              
              </property>

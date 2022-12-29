@@ -6,7 +6,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>LogIn page</title>
-   <style type="text/css">
+
+ <style type="text/css">
      #header{
       background-color: lightblue;
       padding:10px;
@@ -28,6 +29,8 @@
  
    
    </style>
+   
+  
 </head>
         <body>
         <div id="header">
@@ -35,13 +38,14 @@
          <tr>
         <td> <h1>LookIt</h1></td>
         <td class="anchor"> <a href="index.jsp">SignUp</a>
-             <a href="ForgetPassword.jsp">Forget Password</a></td>
-        
+             <a href="ForgetPassword.jsp">Forget Password</a>
+            
+            
          </tr></table></div>
         
          
          
-           <h4>${responsemsg}</h4>
+         <h4>${responsemsg}</h4> 
         <form action="login" method="post">
        <h2>LogIn</h2>
         
@@ -58,6 +62,15 @@
            </tr>
            
              <tr>
+             <td>Profile :</td>
+             <td>
+              <select name="profile">
+                <option>select</option>
+                <option>customer</option>
+                <option>admin</option>
+                <option>worker</option></td>
+              </select>
+             </tr>
            <td><input type="submit"  value="LogIn">
            <td><input type="reset"  value="Reset">
            

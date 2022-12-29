@@ -233,6 +233,7 @@
      <td id="App"><h1>LookIt</h1> </td>
      <td id="anchor"> <a href="ForgetPassword.jsp">Forget Password</a>
      <a href="LogIn.jsp">LogIn</a>
+   
      </td>
      </tr>
      </table>
