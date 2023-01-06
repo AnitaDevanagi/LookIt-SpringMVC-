@@ -4,6 +4,8 @@ public class Customerdetails {
 	private String email;
 	private String model;
 	private String issue;
+	
+	
 	public String getEmail() {
 		return email;
 	}
@@ -24,8 +26,11 @@ public class Customerdetails {
 	}
 	@Override
 	public String toString() {
-		return "customerdetails [email=" + email + ", model=" + model + ", issue=" + issue + "]";
+		return "Customerdetails [email=" + email + ", model=" + model + ", issue=" + issue + "]";
 	}
-
+	
+	
+	
+	
 	
 }

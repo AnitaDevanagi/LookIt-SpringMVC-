@@ -1,5 +1,9 @@
 package com.anita.LookIt.controller;
 
+
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +19,7 @@ import com.anita.LookIt.dto.LogInDTO;
 import com.anita.LookIt.dto.Register;
 
 
+
 @Controller
 
 public class TestController {
@@ -26,7 +31,7 @@ public class TestController {
 		String msg = service.validateandSave(register);
 		System.out.println(msg);
 		modelAndView.addObject("responsemsg", msg);
-		modelAndView.setViewName("Home.jsp");
+		modelAndView.setViewName("/Home.jsp");
 	    return modelAndView;
 	 
 	}
@@ -37,10 +42,14 @@ public class TestController {
 		  String response =service.validateandLogin(login);
 		  System.out.println(response);
 		  modelAndView.addObject("responsemsg", response);
-		  if(response.contains(login.getEmail())) {
-			  modelAndView.setViewName("Customer.jsp");
+		  if("customer".equals(login.getProfile())) {
+			  modelAndView.setViewName("/Customer.jsp");
+		     
+		  }else if("admin".equals(login.getProfile())){
+			 
+			  modelAndView.setViewName("/Admin.jsp"); 
 		  }else {
-			  modelAndView.setViewName("Admin.jsp"); 
+			  modelAndView.setViewName("/Worker.jsp");
 		  }
 		return modelAndView;
 		  
@@ -80,22 +89,47 @@ public class TestController {
 		String respose  = service.validateandsavecustomerdetails(customer); 
 		System.out.println(respose);
 	    modelAndView.addObject("responsemsg ",respose); 
-	    modelAndView.setViewName("Customer.jsp"); 
+	    modelAndView.setViewName("/Customer.jsp"); 
 	    
 		return modelAndView ;
 		
 }
-	@RequestMapping(value="/getprofile/{id}" ,method=RequestMethod.GET)
-	public ModelAndView getMyProfile(@PathVariable("id") String id) {
-		ModelAndView ModelAndView =new ModelAndView ();
-		CustomerDetails respose=service.getmyprofile(id);
-		System.out.println(respose);
-		ModelAndView.addObject("customer",respose);
-		ModelAndView.setViewName("Customer.jsp");
-		return ModelAndView;
+
+	@RequestMapping(value="/getprofile/{id}", method=RequestMethod.GET)
+	 public ModelAndView getMyProfile(@PathVariable("id") String id ) {
+		  ModelAndView modelAndView = new ModelAndView();
+		  System.out.println(id);
+		   CustomerDetails response = service.getmyprofile(id);
+		  modelAndView.addObject("details" ,response);
+		  System.out.println(response);
+		  modelAndView.setViewName("/Customer.jsp");
+		  return modelAndView;
+	 }
+	@RequestMapping(value="/getallopenticket",method=RequestMethod.POST)
+	public ModelAndView getAllOpenTicket(String status) {
+		 ModelAndView modelAndView = new ModelAndView();
+		 List<CustomerDetails> details=service.getAllOpenTickets(status);
+		 System.out.println(details);
+		 modelAndView.addObject("msg", details);
+		 modelAndView.setViewName("Admin.jsp");
+		return modelAndView;
 		
 	}
 	
+	@RequestMapping(value="/getallticket",method=RequestMethod.POST)
+	public ModelAndView getAllTickets(String asignee) {
+		 ModelAndView modelAndView = new ModelAndView();
+		 List<CustomerDetails> details=service.getAllTickets(asignee);
+		 System.out.println(details);
+		 modelAndView.addObject("msg", details);
+		 modelAndView.setViewName("Worker.jsp");
+		return modelAndView;
+		
 	}
+	
+	
+	}
+	
+	
  
 

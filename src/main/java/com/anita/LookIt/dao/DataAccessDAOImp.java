@@ -16,6 +16,7 @@ import com.anita.LookIt.Entity.CustomerDetails;
 import com.anita.LookIt.Entity.UserDetails;
 
 
+
 @Component
 public class  DataAccessDAOImp implements DataAccessDAO {
 	@Autowired
@@ -53,15 +54,40 @@ public UserDetails getByEmailId(String email) {
   
   
 
+
+public CustomerDetails  getByEmail(String email) {
+	 Session session= sessionFactory.openSession();
+	 String que = "from CustomerDetails where email = '"+email+"'";
+	 Query query = session.createQuery(que);
+	 CustomerDetails entity = (CustomerDetails) query.uniqueResult();
+     System.out.println(entity);
+     session.close();
+	 return entity;
+}
+
+   public List<CustomerDetails> getByOpenStatus(String status) {
+      Session session  = sessionFactory.openSession();
+      String response = "from CustomerDetails where status = '"+status+"'";
+      System.out.println(response);
+      Query query =session.createQuery(response);
+      List<CustomerDetails> entity =query.list();
+       System.out.println(entity);
+      session.close();
+	   return entity;
+      
+      
+}
+
 @Override
-public CustomerDetails getByEmail(String email) {
-	Session session=sessionFactory.openSession();
-	String response = "from CustomerDetails where email = '"+email+"'";
-    Query query=session.createQuery(response);
-    CustomerDetails entity = (CustomerDetails) query.uniqueResult();
-	System.out.println( entity);
-	session.close();
-	return entity;
+public List<CustomerDetails> getBytickets(String asignee) {
+	 Session session=sessionFactory.openSession();
+	 String response = "from CustomerDetails where asignee = '"+asignee+"'";
+     System.out.println(response);
+     Query query =session.createQuery(response);
+     List<CustomerDetails> entity =query.list();
+      System.out.println(entity);
+     session.close();
+	 return entity;
 }
 
 }

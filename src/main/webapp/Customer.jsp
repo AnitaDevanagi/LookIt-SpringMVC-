@@ -30,15 +30,13 @@
     }
 
    
-    function saveDataInLocalSession(email){
+    function saveDataInLocalSession(email,model,issue){
         	   console.log(email);
         	 localStorage.setItem("email",email);
-        	 
-        	   
-           }
-   
-    
-
+        	 localStorage.setItem("model",model);
+        	 localStorage.setItem("issue",issue);
+        	
+        }
 </script>
 <style type="text/css">
   #header{
@@ -75,7 +73,7 @@
 </style>
 </head>
 <body onload= "saveDataInLocalSession('${responsemsg}')"> 
-  <h4>${responsemsg}</h4>
+  
 
 <div id="header">
      <table>
@@ -83,8 +81,9 @@
         <td><h1>LookIt</h1><td>
    
        <td> 
-            <a href="#">LogOut</a>
+            <a href="index.jsp">LogOut</a>
             <a href="getprofile/${responsemsg}">Profile</a>
+            <a href="Admin.jsp">Admin</a>
        </td>
        </tr>
     
@@ -135,14 +134,15 @@
         
   </form>
    
-   
+   <form action="getprofile" method="get" >
       <h4>WelCome ${responsemsg}</h4>
     <h4>GetAllTicket details</h4>
-        <div>Email: ${customer.email}</div>
-        <div>issue: ${customer.issue}</div>
-        <div>CreateDate: ${customer.createdate}</div>
-        <div>model: ${customer.model}</div>
-        <div>Status: ${customer.status }</div>
+        <div>Email: ${details.email}</div>
+        <div>issue: ${details.issue}</div>
+        <div>CreateDate: ${details.createdate}</div>
+        <div>model: ${details.model}</div>
+        <div>Status: ${details.status }</div>
+        </form>
   
   </body>
 </html>

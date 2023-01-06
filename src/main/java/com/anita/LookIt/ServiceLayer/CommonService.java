@@ -1,6 +1,8 @@
 package com.anita.LookIt.ServiceLayer;
 
 
+import java.util.List;
+
 import com.anita.LookIt.Entity.CustomerDetails;
 import com.anita.LookIt.dto.Customerdetails;
 import com.anita.LookIt.dto.ForgetPasswordDTO;
@@ -23,6 +25,9 @@ public interface CommonService {
 	
 	public CustomerDetails getmyprofile(String email);
 	
+	public List<CustomerDetails> getAllOpenTickets(String status);
+	
+	public List<CustomerDetails> getAllTickets(String asignee);
 	
 
 }

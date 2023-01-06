@@ -3,6 +3,8 @@ package com.anita.LookIt.ServiceLayer;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -205,15 +207,33 @@ public class CommonServiceImpl implements CommonService{
 
 	@Override
 	public CustomerDetails getmyprofile(String email) {
-		CustomerDetails result=null;
+		CustomerDetails  result=null;
 		if(email!=null && !email.isEmpty()) {
-	    result = dao.getByEmail(email);
+	    result= dao.getByEmail(email);
+	    
 	    }
 		return result;
+		
 	}
+
+	@Override
+	public List<CustomerDetails> getAllOpenTickets(String status) {
+		List<CustomerDetails>   result = null;
+    if(status!=null && !status.isEmpty()) {
+    result = (List<CustomerDetails>) dao.getByOpenStatus(status);
+	System.out.println(result);
+	}
+    return result;
+	
+	}
+
+	@Override
+	public List<CustomerDetails> getAllTickets(String asignee) {
+		 List<CustomerDetails> details =dao.getBytickets(asignee);
+		return details;
 	}
 	
 		
-	
+}
 
 
